@@ -9,6 +9,7 @@ export NGINX_CONF=/etc/nginx/mushed.conf
 export HSTS=${HSTS:-0}
 export HSTS_MAX_AGE=${HSTS_MAX_AGE:-31536000}
 export HSTS_INCLUDE_SUBDOMAINS=${HSTS_INCLUDE_SUBDOMAINS:-0}
+export LARGE_CLIENT_HEADER_BUFFERS=${LARGE_CLIENT_HEADER_BUFFERS:-8k}
 
 # Build config
 cat <<EOF > $NGINX_CONF
@@ -23,6 +24,7 @@ http {
     server {
         listen $HTTP_PORT;
         server_tokens off;
+        large_client_header_buffers 4 $LARGE_CLIENT_HEADER_BUFFERS;
         $([ "${HSTS}" != "0" ] && echo "
         add_header Strict-Transport-Security \"max-age=${HSTS_MAX_AGE};$([ "${HSTS_INCLUDE_SUBDOMAINS}" != "0"] && echo "includeSubDomains")\";
         ")

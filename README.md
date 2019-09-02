@@ -26,4 +26,4 @@ Adjust Dockerfile to override the defaults
 | HTTP_PORT               |                                                                     | `80`            |                                                             |
 | REDIRECT                |                                                                     | `https://$host` |                                                             |
 | REDIRECT_TYPE           |                                                                     | `permanent`     | `redirect` (302 redirection), `permanent` (301 redirection) |
-
+| LARGE_CLIENT_HEADER_BUFFERS |                                                                 | `8k`            |                                                             |
